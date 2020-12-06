@@ -5,11 +5,19 @@ import {getCurrency} from '../../../utils';
 import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {useFocusRef} from '../../../customHooks';
+import {useDispatch} from 'react-redux';
+import {putItemToCart} from '../../../reducers/cartReducer/duck/actions';
+import {switchSuccessAlert} from '../../../reducers/alertReducer/duck/actions';
 
 const slide = keyframes`
   0% {transform: translateY(-50px); opacity: 0}
   50% {transform: translateY(10px);}
   100% {transform: translateY(0); opacity: 1}
+`
+
+const opacity = keyframes`
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 `
 
 const StyledWrapper = styled.div.attrs({
@@ -31,7 +39,7 @@ const StyledAvatar = styled.img`
   object-fit: contain;
   ${({animation}) => (
     animation && css`
-      animation: ${slide} 1s;
+      animation: ${opacity} 1s;
     `
   )}
 `
@@ -93,6 +101,8 @@ const BookComponent = ({book, index}) => {
   const [display, setDisplay] = useState(false);
   const [animationOnPicture, setAnimationOnPicture] = useState(false)
 
+  const dispatch = useDispatch()
+
   const ref = useRef();
   const refAction = useFocusRef(ref);
 
@@ -107,6 +117,17 @@ const BookComponent = ({book, index}) => {
       clearTimeout(handler)
     }
   }, [])
+
+  const addOne = (item) => (
+    (parseInt(item) + 1).toString()
+  )
+
+  const handleAddToCart = () => {
+    const cartItems = sessionStorage.getItem(book.id.toString())
+    sessionStorage.setItem(book.id.toString(), cartItems ? addOne(cartItems) : '1')
+    dispatch(putItemToCart(book.id))
+    dispatch(switchSuccessAlert({success: true, message: 'Pomyślnie dodano do koszyka'}))
+  }
 
   return (
     <StyledWrapper display={display ? 'true' : undefined}>
@@ -139,6 +160,7 @@ const BookComponent = ({book, index}) => {
 
       <StyledPartition>
         <Button
+          onClick={handleAddToCart}
           className='mb-2 mr-2'
           endIcon={<AddShoppingCartIcon fontSize='small'/>}
           size='small'

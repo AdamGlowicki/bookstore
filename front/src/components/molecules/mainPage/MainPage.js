@@ -6,8 +6,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {showNumbers, sortTemplates} from '../../../enum';
 import MenuItem from '@material-ui/core/MenuItem';
 import AsyncSelect from '../../atoms/asyncSelect/AsyncSelect';
-import {NavLink} from 'react-router-dom';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PaginationComponent
   from '../../atoms/paginationComponent/PaginationComponent';
 import {divideArray} from '../../../utils';
@@ -18,7 +16,7 @@ const slide = keyframes`
   to {transform: scaleX(1); opacity: 1;}
 `
 const StyledSort = styled.div.attrs({
-  className: 'mt-3 mb-5'
+  className: 'ml-5'
 })`
   display: flex;
   flex-direction: row;
@@ -32,11 +30,14 @@ const BooksContent = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-auto-flow: row;
   grid-column-gap: 16px;
+  justify-items: center;
 `
-const StyledControls = styled.div`
+const StyledControls = styled.div.attrs({
+  className: 'mt-5'
+})`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   animation: ${slide} .8s;
   transform-origin: left;
@@ -45,7 +46,7 @@ const StyledControls = styled.div`
 const MainPage = () => {
   const [sort, setSort] = useState('');
   const [page, setPage] = useState(1);
-  const [showNumber, setShowNumber] = useState(9);
+  const [showNumber, setShowNumber] = useState(8);
 
   const books = useSelector(state => state.books.books)
   const dispatch = useDispatch();
@@ -74,23 +75,19 @@ const MainPage = () => {
   return (
     <div>
       <StyledControls>
+        <StyledSort>
+          <Select width='180px' value={sort} onChange={handleSelectSort} label='Sortuj wg.:' menuItems={menuItems}/>
+          <div className='ml-3'>
+            <Select width='45px' value={showNumber} onChange={handleSelectShowNumbers} menuItems={menuNumbersItem}/>
+          </div>
+        </StyledSort>
+
         <div className='mr-5'>
           <AsyncSelect width='300px'/>
         </div>
-
-        <div>
-          <NavLink  to='/ss'>
-            <ShoppingCartIcon style={{color: 'lightgrey'}}  fontSize='large'/>
-          </NavLink>
-        </div>
       </StyledControls>
 
-      <StyledSort>
-        <Select width='180px' value={sort} onChange={handleSelectSort} label='Sortuj wg.:' menuItems={menuItems}/>
-        <div className='ml-3'>
-          <Select width='40px' value={showNumber} onChange={handleSelectShowNumbers} menuItems={menuNumbersItem}/>
-        </div>
-      </StyledSort>
+
       <BooksContent>
         {books && dividedBooks[page -1].map((book, i) => (<BookComponent key={book.id} book={book} index={i}/>))}
       </BooksContent>

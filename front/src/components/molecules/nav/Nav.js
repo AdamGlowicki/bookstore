@@ -1,7 +1,9 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
-import {NavLink} from 'react-router-dom';
 import logo from '../../../assets/logo.jpg'
+import CustomLink from '../../atoms/customLink/CustomLink';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const slide = keyframes`
   from {transform: scaleX(0); opacity: 0}
@@ -21,6 +23,7 @@ const StyledUl = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   list-style: none;
   padding: 0;
 `
@@ -50,7 +53,7 @@ const Nav = () => {
     <StyledNav>
       <StyledUl>
         <StyledLi>
-          <NavLink to='/'>
+          <CustomLink to='/'>
             <StyledLogoContent>
               <div>
                 <StyledLogo/>
@@ -59,7 +62,17 @@ const Nav = () => {
                 Księgarnia
               </div>
             </StyledLogoContent>
-          </NavLink>
+          </CustomLink>
+        </StyledLi>
+
+        <StyledLi>
+          <Tooltip title='Przejdź do koszyka'>
+            <div className='mr-3'>
+              <CustomLink to='/cart'>
+                <ShoppingCartIcon style={{color: 'lightgrey'}}  fontSize='large'/>
+              </CustomLink>
+            </div>
+          </Tooltip>
         </StyledLi>
       </StyledUl>
     </StyledNav>

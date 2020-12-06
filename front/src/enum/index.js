@@ -13,7 +13,7 @@ export const sortTemplates = [
 ];
 
 export const showNumbers = [
-  {id: 1, number: 3},
-  {id: 2, number: 6},
-  {id: 3, number: 9},
+  {id: 1, number: 4},
+  {id: 2, number: 8},
+  {id: 3, number: 12},
 ]

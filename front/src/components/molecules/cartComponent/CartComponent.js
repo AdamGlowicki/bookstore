@@ -1,7 +1,8 @@
-import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
+import React, {Fragment, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import ItemInCart from '../itemInCart/ItemInCart';
+import {useSelector} from 'react-redux';
+import bag from '../../../assets/bag.png'
 
 const StyledWrapper = styled.div`
   display: grid;
@@ -32,26 +33,56 @@ const StyledTitle = styled.div`
   width: ${props => props.width};
 `
 
-const CartComponent = props => {
+const StyledBag = styled.img.attrs({
+  className: 'mt-5'
+})`
+  grid-column: 1 / 2;
+  justify-self: center;
+  max-height: 300px;
+  object-fit: contain;
+`
+
+const CartComponent = () => {
+  const [books, setBooks] = useState([])
+
+  const gotBooks = useSelector(state => state.books.books)
+  const cart = useSelector(state => state.cart.cart)
+  const ids = cart.map(item => item.id)
+  const quantities = cart.map(item => item.quantity)
+
+  useEffect(() => {
+    if (gotBooks) {
+      setBooks(gotBooks.filter(item => ids.includes(item.id)))
+    }
+  }, [gotBooks])
+
+  const getQuantityById = (id) => {
+    return cart.filter(item => item.id === id)[0].quantity
+  }
+
   return (
     <Fragment>
       <StyledWrapper>
-        <StyledItems>
-          <StyledInfo>
-            <StyledTitle width='80%'>
-              Produkty w koszyku
-            </StyledTitle>
-            <StyledTitle width='10%'>
-              Ilość
-            </StyledTitle>
-            <StyledTitle width='10%'>
-              Usuń
-            </StyledTitle>
-          </StyledInfo>
+        {books.length ? (
+          <StyledItems>
+            <StyledInfo>
+              <StyledTitle width='80%'>
+                Produkty w koszyku
+              </StyledTitle>
+              <StyledTitle width='10%'>
+                Ilość
+              </StyledTitle>
+              <StyledTitle width='10%'>
+                Usuń
+              </StyledTitle>
+            </StyledInfo>
 
-          <ItemInCart/>
-        </StyledItems>
-
+            {books.map((item, i) => (
+              <ItemInCart key={item.id} book={item} index={i} quantity={getQuantityById(item.id)}/>))}
+          </StyledItems>
+        ) : (
+          <StyledBag src={bag}/>
+        )}
         <StyledAside>
 
         </StyledAside>
@@ -59,7 +90,5 @@ const CartComponent = props => {
     </Fragment>
   );
 };
-
-CartComponent.propTypes = {};
 
 export default CartComponent;
