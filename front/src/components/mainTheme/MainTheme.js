@@ -11,8 +11,8 @@ const StyledWrapper = styled.div`
 `
 
 const StyledContent = styled.div`
-  width: 1024px;
   background-color:white;
+  width: 1300px;
 `
 
 

@@ -13,6 +13,8 @@ const StyledNav = styled.nav`
   width: 100%;
   animation: ${slide} 1s;
   transform-origin: 0 0;
+  background-color: rgb(247, 243, 243);
+  border-radius: 8px;
 `
 
 const StyledUl = styled.ul`

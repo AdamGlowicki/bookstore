@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import styled, {keyframes, css} from 'styled-components';
 import {getCurrency} from '../../../utils';
 import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import {useFocusRef} from '../../../customHooks';
 
 const slide = keyframes`
   0% {transform: translateY(-50px); opacity: 0}
@@ -19,15 +20,20 @@ const StyledWrapper = styled.div.attrs({
   flex-direction: column;
   animation: ${slide} 1s;
   ${({display}) => (
-    display && css`
+  display && css`
       display: flex;
   `
 )}
 `
 
 const StyledAvatar = styled.img`
-  max-height: 264px;
+  max-height: 196px;
   object-fit: contain;
+  ${({animation}) => (
+    animation && css`
+      animation: ${slide} 1s;
+    `
+  )}
 `
 
 const StyledDescription = styled.div.attrs({
@@ -39,13 +45,13 @@ const StyledDescription = styled.div.attrs({
 `
 
 const StyledTitle = styled.h3`
-  font: 16px Arial, sans-serif;
+  font: 13px Arial, sans-serif;
   font-weight: 400;
   color: #0F1111;
 `
 
 const StyledAuthor = styled.h5`
-  font: 14px Arial, sans-serif;
+  font: 13px Arial, sans-serif;
   font-weight: 300;
   color:#007185;
 `
@@ -61,7 +67,7 @@ const StyledPrice = styled.div.attrs({
 `
 
 const StyledPages = styled.div`
-  font: 14px Arial, sans-serif;
+  font: 11px Arial, sans-serif;
   font-weight: 400;
 `
 
@@ -85,6 +91,14 @@ const StyledPartition = styled.div.attrs({
 
 const BookComponent = ({book, index}) => {
   const [display, setDisplay] = useState(false);
+  const [animationOnPicture, setAnimationOnPicture] = useState(false)
+
+  const ref = useRef();
+  const refAction = useFocusRef(ref);
+
+  useEffect(() => {
+    setAnimationOnPicture(refAction)
+  }, [refAction])
 
   useEffect(() => {
     const handler = setTimeout(() => setDisplay(true), index * 100)
@@ -96,7 +110,12 @@ const BookComponent = ({book, index}) => {
 
   return (
     <StyledWrapper display={display ? 'true' : undefined}>
-      <StyledAvatar src={book.cover_url} alt={book.title}/>
+      <StyledAvatar
+        ref={ref}
+        src={book.cover_url}
+        alt={book.title}
+        animation={animationOnPicture ? 'true' : undefined}
+      />
 
       <StyledDescription>
         <StyledTitle>

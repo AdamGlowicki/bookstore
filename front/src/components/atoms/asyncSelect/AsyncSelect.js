@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import InputText from "../inputText/InputText";
 import ViewToAsyncSelect
-  from '../../organisms/viewToAsyncSelect/ViewToAsyncSelect';
+  from '../../molecules/viewToAsyncSelect/ViewToAsyncSelect';
 
 const AsyncSelect = ({setSelected, value, width}) => {
   const [open, setOpen] = useState(false);
