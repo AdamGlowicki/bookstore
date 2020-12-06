@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import styled, {keyframes} from 'styled-components';
+import styled, {keyframes, css} from 'styled-components';
 import {getCurrency} from '../../../utils';
 import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
@@ -15,9 +15,14 @@ const StyledWrapper = styled.div.attrs({
   className: 'mt-5'
 })`
   width: 300px;
-  display: ${props => props.display ? 'flex' : 'none'};
+  display: none;
   flex-direction: column;
   animation: ${slide} 1s;
+  ${({display}) => (
+    display && css`
+      display: flex;
+  `
+)}
 `
 
 const StyledAvatar = styled.img`
@@ -90,7 +95,7 @@ const BookComponent = ({book, index}) => {
   }, [])
 
   return (
-    <StyledWrapper display={display}>
+    <StyledWrapper display={display ? 'true' : undefined}>
       <StyledAvatar src={book.cover_url} alt={book.title}/>
 
       <StyledDescription>

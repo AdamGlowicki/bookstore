@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 
 const StyledTextField = withStyles({
   root: {
-    width: '200px',
+    width: props => props.width,
     '& label.Mui-focused': {
       color: 'rgb(162,198,0)',
     },

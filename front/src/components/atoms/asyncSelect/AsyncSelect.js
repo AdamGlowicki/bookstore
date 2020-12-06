@@ -4,7 +4,7 @@ import InputText from "../inputText/InputText";
 import ViewToAsyncSelect
   from '../../organisms/viewToAsyncSelect/ViewToAsyncSelect';
 
-const AsyncSelect = ({setSelected, value}) => {
+const AsyncSelect = ({setSelected, value, width}) => {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [disabled, setDisabled] = useState(false);
@@ -62,6 +62,7 @@ const AsyncSelect = ({setSelected, value}) => {
             disabled={disabled}
             onChange={(e) => setSearch(e.target.value)}
             label='Wyszukaj książkę'
+            width={width}
           />
       )}
       renderOption={(options, val) => {

@@ -15,6 +15,7 @@ const Root = () => {
           <Switch>
             <Route exact path='/' component={() => <Redirect to='/books'/>}/>
             <Route path='/books' component={MainPage}/>
+            <Route path='/cart' component={MainPage}/>
           </Switch>
         </MainTheme>
       </BrowserRouter>
