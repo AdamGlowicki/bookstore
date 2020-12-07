@@ -1,9 +1,9 @@
 import {
   ADD_FROM_SESSION_TO_CART,
-  ADD_TO_CART,
+  ADD_TO_CART, REMOVE_FROM_CART,
   SET_NUMBER_ITEMS_CART
 } from './type';
-import {handleAddToCart, setQuantity} from './method';
+import {handleAddToCart, remove, setQuantity} from './method';
 
 const initState = {
   cart: [],
@@ -17,6 +17,8 @@ const cartReducer = (state = initState, {type, payload}) => {
       return setQuantity(state, payload)
     case ADD_FROM_SESSION_TO_CART:
       return {...state, cart: [...state.cart, ...payload]}
+    case REMOVE_FROM_CART:
+      return remove(state, payload);
     default:
       return {...state}
   }

@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import styled, {keyframes} from 'styled-components'
 import Draggable from 'react-draggable';
 import {Resizable} from "re-resizable";
-import Modal from '@material-ui/core/Modal';
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
-import {withStyles} from "@material-ui/core";
 
 const slide = keyframes`
   from {transform: scaleX(0); opacity: 0;}
@@ -56,14 +54,6 @@ const StyledModalContent = styled.div`
   outline: none;
 `
 
-const StyledModal = withStyles({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-})(props => <Modal {...props}/>)
-
 const DraggableModal = ({open: propsOpen, setOpen: prosSetOpen, children}) => {
 
   const [open, setOpen] = useState(false)
@@ -81,46 +71,30 @@ const DraggableModal = ({open: propsOpen, setOpen: prosSetOpen, children}) => {
     prosSetOpen(false)
   }
   return (
-    <StyledModal
-      style={{
-        width: '0',
-        height: '0',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-      }}
-      BackdropProps={{
-        style: {
-          backgroundColor: 'transparent',
-          boxShadow: 'none',
-          width: 0,
-          height: 0,
-        },
-      }}
-      open={open}
-    >
-      <StyledModalContent>
-        <Draggable handle='aside'>
-          <Resizable>
-            <StyledContent
-              onAnimationEnd={onAnimationEnd}
-              animation={propsOpen}
-            >
-              <div className='d-flex flex-row'>
-                <StyledAside>👈🏻 👉🏻</StyledAside>
-                <IconButton onClick={handleClose} variant="contained" color="secondary">
-                  <CloseIcon/>
-                </IconButton>
-              </div>
-              <StyledScrollContent>
-                {children}
-              </StyledScrollContent>
-            </StyledContent>
-          </Resizable>
-        </Draggable>
-      </StyledModalContent>
-    </StyledModal>
-
+    <Fragment>
+      {open && (
+        <StyledModalContent>
+          <Draggable handle='aside'>
+            <Resizable>
+              <StyledContent
+                onAnimationEnd={onAnimationEnd}
+                animation={propsOpen}
+              >
+                <div className='d-flex flex-row'>
+                  <StyledAside/>
+                  <IconButton onClick={handleClose} variant="contained" color="secondary">
+                    <CloseIcon/>
+                  </IconButton>
+                </div>
+                <StyledScrollContent>
+                  {children}
+                </StyledScrollContent>
+              </StyledContent>
+            </Resizable>
+          </Draggable>
+        </StyledModalContent>
+      )}
+    </Fragment>
   );
 };
 

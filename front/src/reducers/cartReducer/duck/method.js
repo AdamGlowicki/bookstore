@@ -1,6 +1,5 @@
 export const handleAddToCart = (state, payload) => {
   const ids = state.cart.filter(item => item.id === payload)
-  console.log(payload)
   if (ids.length) {
     return {...state, cart: [...state.cart.map(item => {
       return item.id === payload ? {
@@ -21,4 +20,9 @@ export const setQuantity = (state, payload) => ({
       quantity: payload.quantity
     } : {...item}
   })]
+})
+
+export const remove = (state, payload) => ({
+  ...state,
+  cart: [...state.cart.filter(item => item.id !== payload)]
 })

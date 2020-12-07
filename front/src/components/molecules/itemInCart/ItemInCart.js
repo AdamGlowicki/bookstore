@@ -1,15 +1,14 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import styled, {keyframes} from 'styled-components';
-import {useDispatch, useSelector} from 'react-redux';
-import DraggableModal from '../draggableModal/DraggableModal';
-import BookComponent from '../bookComponent/BookComponent';
+import {useDispatch} from 'react-redux';
 import Button from '@material-ui/core/Button';
 import InputText from '../../atoms/inputText/InputText';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
 import {
+  removeFromCart,
   setCartQuantity
 } from '../../../reducers/cartReducer/duck/actions';
 import {
@@ -17,6 +16,7 @@ import {
   switchProgress
 } from "../../../reducers/alertReducer/duck/actions";
 import {getData} from "../../../api";
+import AcceptWindow from '../acceptWindow/AcceptWindow';
 
 const slide = keyframes`
   from {transform: scaleX(0); opacity: 0}
@@ -58,9 +58,10 @@ const StyledButtonContent = styled.div`
 `
 const ItemInCart = ({book: {id, quantity}, index}) => {
   const [open, setOpen] = useState(false)
-  const [animation, setAnimation] = useState(false)
+  const [animation, setAnimation] = useState(true)
   const [display, setDisplay] = useState(false)
   const [book, setBook] = useState({})
+  const [openAcceptWindow, setOpenAcceptWindow] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -71,7 +72,11 @@ const ItemInCart = ({book: {id, quantity}, index}) => {
       const result = await getData(`book/${id}`)
       setBook(result.data.data)
     } catch (e) {
-      dispatch(switchAlert({on: true, message: 'Nie udało się załadować treści', type: 'error'}))
+      dispatch(switchAlert({
+        on: true,
+        message: 'Nie udało się załadować treści',
+        type: 'error'
+      }))
 
     }
     dispatch(switchProgress(false))
@@ -92,12 +97,32 @@ const ItemInCart = ({book: {id, quantity}, index}) => {
 
   const handleChange = (e) => {
     const {value} = e.target;
-    dispatch(setCartQuantity({id, quantity: parseInt(value)}))
+    if (value <= '0') {
+      setOpenAcceptWindow(true)
+    } else {
+      dispatch(setCartQuantity({id, quantity: parseInt(value)}))
+      sessionStorage.setItem(id.toString(), value.toString())
+    }
   }
+
+  const handleStartAnimationClose = () => {
+    setAnimation(false)
+  }
+
+  const onAnimationEnd = () => {
+    if (!animation) {
+      dispatch(removeFromCart(id))
+      sessionStorage.removeItem(id.toString())
+    }
+  }
+
   return (
     <Fragment>
-      <StyledWrapper display={display ? 'true' : undefined}
-                     animation={animation ? 'true' : 'false'}>
+      <StyledWrapper
+        display={display ? 'true' : undefined}
+        animation={animation ? true : false}
+        onAnimationEnd={onAnimationEnd}
+      >
         <div style={{width: '80%'}}>
           <Tooltip title='Kliknij żeby zobaczyć szczegóły'>
             <Button onClick={openModal}>
@@ -120,20 +145,23 @@ const ItemInCart = ({book: {id, quantity}, index}) => {
             onChange={handleChange}
             value={quantity}
             inputProps={{
-              style: {padding: 0}
+              style: {padding: 0, textAlign: 'center'}
             }}
           />
           <Tooltip title='Usuń produkt z koszyka'>
-            <IconButton size='small'>
+            <IconButton onClick={() => setOpenAcceptWindow(true)} size='small'>
               <DeleteIcon style={{color: 'red'}} fontSize='small'/>
             </IconButton>
           </Tooltip>
         </div>
       </StyledWrapper>
 
-      <DraggableModal open={open} setOpen={setOpen}>
-        <BookComponent book={book} index={0}/>
-      </DraggableModal>
+      <AcceptWindow
+        setOpen={setOpenAcceptWindow}
+        open={openAcceptWindow}
+        callback={handleStartAnimationClose}
+        message='Czy na pewno chcesz usunąć produkt z koszyka?'
+      />
     </Fragment>
 
   );
