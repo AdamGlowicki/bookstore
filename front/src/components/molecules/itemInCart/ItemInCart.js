@@ -17,6 +17,8 @@ import {
 } from "../../../reducers/alertReducer/duck/actions";
 import {getData} from "../../../api";
 import AcceptWindow from '../acceptWindow/AcceptWindow';
+import DraggableModal from '../draggableModal/DraggableModal';
+import BookComponent from '../bookComponent/BookComponent';
 
 const slide = keyframes`
   from {transform: scaleX(0); opacity: 0}
@@ -57,10 +59,10 @@ const StyledButtonContent = styled.div`
   align-items: center;
 `
 const ItemInCart = ({book: {id, quantity}, index}) => {
-  const [open, setOpen] = useState(false)
-  const [animation, setAnimation] = useState(true)
-  const [display, setDisplay] = useState(false)
-  const [book, setBook] = useState({})
+  const [open, setOpen] = useState(false);
+  const [animation, setAnimation] = useState(true);
+  const [display, setDisplay] = useState(false);
+  const [book, setBook] = useState({});
   const [openAcceptWindow, setOpenAcceptWindow] = useState(false);
 
   const dispatch = useDispatch();
@@ -161,6 +163,10 @@ const ItemInCart = ({book: {id, quantity}, index}) => {
         callback={handleStartAnimationClose}
         message='Czy na pewno chcesz usunąć produkt z koszyka?'
       />
+
+      <DraggableModal open={open} setOpen={setOpen} >
+        <BookComponent book={book} index={0}/>
+      </DraggableModal>
     </Fragment>
 
   );

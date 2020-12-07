@@ -8,6 +8,7 @@ import MainPage from '../../molecules/mainPage/MainPage';
 import CartComponent from '../../molecules/cartComponent/CartComponent';
 import {getSessionStorage} from '../../../assets/utils';
 import {addFromSession} from '../../../reducers/cartReducer/duck/actions';
+import Credentials from '../../molecules/credentials/Credentials';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const App = () => {
             <Route exact path='/' component={() => <Redirect to='/books'/>}/>
             <Route path='/books' component={MainPage}/>
             <Route path='/cart' component={CartComponent}/>
+            <Route path='/credentials' component={Credentials}/>
           </Switch>
         </MainTheme>
       </BrowserRouter>

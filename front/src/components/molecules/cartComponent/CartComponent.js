@@ -135,7 +135,7 @@ const CartComponent = () => {
                 </StyledCartPrice>
               </div>
               <div className='mt-5 mr-5 d-flex flex-row justify-content-end'>
-                <CustomLink to='/'>
+                <CustomLink to='credentials'>
                   <StyledLinkContent>
                     dalej
                   </StyledLinkContent>
