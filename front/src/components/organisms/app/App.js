@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {fetchBooks} from '../../../reducers/bookReducer/duck/operations';
 import MainPage from '../../molecules/mainPage/MainPage';
 import CartComponent from '../../molecules/cartComponent/CartComponent';
-import {getSessionStorage} from '../../../utils';
+import {getSessionStorage} from '../../../assets/utils';
 import {addFromSession} from '../../../reducers/cartReducer/duck/actions';
 
 const App = () => {

@@ -12,6 +12,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import {
   setCartQuantity
 } from '../../../reducers/cartReducer/duck/actions';
+import {
+  switchAlert,
+  switchProgress
+} from "../../../reducers/alertReducer/duck/actions";
+import {getData} from "../../../api";
 
 const slide = keyframes`
   from {transform: scaleX(0); opacity: 0}
@@ -51,15 +56,30 @@ const StyledButtonContent = styled.div`
   justify-content: flex-start;
   align-items: center;
 `
-const ItemInCart = ({book, index, quantity}) => {
+const ItemInCart = ({book: {id, quantity}, index}) => {
   const [open, setOpen] = useState(false)
   const [animation, setAnimation] = useState(false)
   const [display, setDisplay] = useState(false)
+  const [book, setBook] = useState({})
+
   const dispatch = useDispatch();
 
-  const {id, title, cover_url} = book;
+
+  const asyncGetProduct = async () => {
+    dispatch(switchProgress(true))
+    try {
+      const result = await getData(`book/${id}`)
+      setBook(result.data.data)
+    } catch (e) {
+      dispatch(switchAlert({on: true, message: 'Nie udało się załadować treści', type: 'error'}))
+
+    }
+    dispatch(switchProgress(false))
+  }
+
 
   useEffect(() => {
+    asyncGetProduct()
     const handler = setTimeout(() => setDisplay(true), index * 200)
     return () => {
       clearTimeout(handler)
@@ -82,10 +102,10 @@ const ItemInCart = ({book, index, quantity}) => {
           <Tooltip title='Kliknij żeby zobaczyć szczegóły'>
             <Button onClick={openModal}>
               <StyledButtonContent>
-                <StyledAvatar src={cover_url}/>
+                <StyledAvatar src={book.cover_url}/>
 
                 <StyledTitle>
-                  {title}
+                  {book.title}
                 </StyledTitle>
               </StyledButtonContent>
             </Button>

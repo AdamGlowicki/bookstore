@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import AsyncSelect from '../../atoms/asyncSelect/AsyncSelect';
 import PaginationComponent
   from '../../atoms/paginationComponent/PaginationComponent';
-import {divideArray} from '../../../utils';
+import {divideArray} from '../../../assets/utils';
 import {sortBooksInStore} from '../../../reducers/bookReducer/duck/actions';
 
 const slide = keyframes`

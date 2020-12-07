@@ -16,16 +16,18 @@ const StyledSnackbar = withStyles({
   }
 })(props => <Snackbar {...props}/>)
 
-const SuccessAlert = ({}) => {
+const Alert = () => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
+  const [type, setType] = useState('')
 
   const alert = useSelector(state => state.alert.alert)
 
   useEffect(() => {
     if (alert) {
-      setOpen(alert.success);
+      setOpen(alert.on);
       setMessage(alert.message)
+      setType(alert.type)
     }
   }, [alert])
 
@@ -38,15 +40,27 @@ const SuccessAlert = ({}) => {
     }
   }, [open])
 
+  const getAlertType = () => {
+    switch (type) {
+      case 'success':
+        return 'success';
+      case 'error':
+        return 'error';
+      default:
+        return '';
+    }
+  }
+
   return (
     <StyledSnackbar
       anchorOrigin={{vertical: 'top', horizontal: 'right'}}
       open={open}
       onClose={() => setOpen(false)}
     >
-      <MuiAlert severity='success'>{message}</MuiAlert>
+      <MuiAlert severity={getAlertType()}>{message}</MuiAlert>
     </StyledSnackbar>
   );
 };
 
-export default SuccessAlert;
+
+export default Alert;

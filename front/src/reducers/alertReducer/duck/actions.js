@@ -1,6 +1,14 @@
-import {SWITCH_SUCCESS_ALERT} from './type';
+import {
+  SWITCH_PROGRESS,
+  SWITCH_ALERT
+} from './type';
 
-export const switchSuccessAlert = payload => ({
-  type: SWITCH_SUCCESS_ALERT,
+export const switchAlert = payload => ({
+  type: SWITCH_ALERT,
   payload
+})
+
+export const switchProgress = payload => ({
+  type: SWITCH_PROGRESS,
+  payload,
 })

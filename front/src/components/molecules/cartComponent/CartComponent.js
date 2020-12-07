@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import ItemInCart from '../itemInCart/ItemInCart';
 import {useSelector} from 'react-redux';
-import bag from '../../../assets/bag.png'
+import bag from '../../../assets/images/bag.png'
 
 const StyledWrapper = styled.div`
   display: grid;
@@ -43,27 +43,12 @@ const StyledBag = styled.img.attrs({
 `
 
 const CartComponent = () => {
-  const [books, setBooks] = useState([])
-
-  const gotBooks = useSelector(state => state.books.books)
   const cart = useSelector(state => state.cart.cart)
-  const ids = cart.map(item => item.id)
-  const quantities = cart.map(item => item.quantity)
-
-  useEffect(() => {
-    if (gotBooks) {
-      setBooks(gotBooks.filter(item => ids.includes(item.id)))
-    }
-  }, [gotBooks])
-
-  const getQuantityById = (id) => {
-    return cart.filter(item => item.id === id)[0].quantity
-  }
 
   return (
     <Fragment>
       <StyledWrapper>
-        {books.length ? (
+        {cart.length ? (
           <StyledItems>
             <StyledInfo>
               <StyledTitle width='80%'>
@@ -77,11 +62,11 @@ const CartComponent = () => {
               </StyledTitle>
             </StyledInfo>
 
-            {books.map((item, i) => (
-              <ItemInCart key={item.id} book={item} index={i} quantity={getQuantityById(item.id)}/>))}
+            {cart.map((item, i) => (
+              <ItemInCart key={item.id} book={item} index={i}/>))}
           </StyledItems>
         ) : (
-          <StyledBag src={bag}/>
+          <StyledBag src={bag} alt='torba zakupowa'/>
         )}
         <StyledAside>
 

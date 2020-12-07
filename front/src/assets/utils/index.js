@@ -23,12 +23,7 @@ export const divideArray = (array, partsNumber) => {
 
 export const getSessionStorage = () => {
   const sessionData = Object.entries(sessionStorage)
-
   return sessionData.map((item, i) => {
-    if ((sessionData.length - 1) === i) {
-
-    } else {
       return ({id: parseInt(item[0]), quantity: parseInt(item[1])})
-    }
   }).filter(item => item != null)
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
-import logo from '../../../assets/logo.jpg'
+import logo from '../../../assets/images/logo.jpg'
 import CustomLink from '../../atoms/customLink/CustomLink';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Tooltip from '@material-ui/core/Tooltip';

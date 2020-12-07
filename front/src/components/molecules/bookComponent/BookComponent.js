@@ -1,13 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import styled, {keyframes, css} from 'styled-components';
-import {getCurrency} from '../../../utils';
+import {getCurrency} from '../../../assets/utils';
 import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {useFocusRef} from '../../../customHooks';
 import {useDispatch} from 'react-redux';
 import {putItemToCart} from '../../../reducers/cartReducer/duck/actions';
-import {switchSuccessAlert} from '../../../reducers/alertReducer/duck/actions';
+import {switchAlert} from '../../../reducers/alertReducer/duck/actions';
 
 const slide = keyframes`
   0% {transform: translateY(-50px); opacity: 0}
@@ -126,7 +126,7 @@ const BookComponent = ({book, index}) => {
     const cartItems = sessionStorage.getItem(book.id.toString())
     sessionStorage.setItem(book.id.toString(), cartItems ? addOne(cartItems) : '1')
     dispatch(putItemToCart(book.id))
-    dispatch(switchSuccessAlert({success: true, message: 'Pomyślnie dodano do koszyka'}))
+    dispatch(switchAlert({on: true, message: 'Pomyślnie dodano do koszyka', type: 'success'}))
   }
 
   return (
