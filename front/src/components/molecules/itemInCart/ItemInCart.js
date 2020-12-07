@@ -65,7 +65,6 @@ const ItemInCart = ({book: {id, quantity}, index}) => {
 
   const dispatch = useDispatch();
 
-
   const asyncGetProduct = async () => {
     dispatch(switchProgress(true))
     try {

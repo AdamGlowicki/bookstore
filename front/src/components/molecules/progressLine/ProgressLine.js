@@ -1,5 +1,6 @@
 import React, {useEffect, useReducer} from 'react';
 import styled, {css} from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -89,5 +90,9 @@ const ProgressLine = ({stage}) => {
 
   );
 };
+
+ProgressLine.propTypes = {
+  stage: PropTypes.string.isRequired,
+}
 
 export default ProgressLine;

@@ -123,9 +123,15 @@ const BookComponent = ({book, index}) => {
   )
 
   const handleAddToCart = () => {
-    const cartItems = sessionStorage.getItem(book.id.toString())
-    sessionStorage.setItem(book.id.toString(), cartItems ? addOne(cartItems) : '1')
-    dispatch(putItemToCart(book.id))
+    const cartItem = sessionStorage.getItem(book.id.toString())
+    if (cartItem) {
+      const item = JSON.parse(cartItem)
+      sessionStorage.setItem(book.id.toString(), JSON.stringify({quantity: item.quantity + 1 , price: book.price}))
+    } else {
+      sessionStorage.setItem(book.id.toString(), JSON.stringify({quantity: 1 , price: book.price}))
+    }
+
+    dispatch(putItemToCart({id: book.id, price: book.price}))
     dispatch(switchAlert({on: true, message: 'Pomyślnie dodano do koszyka', type: 'success'}))
   }
 

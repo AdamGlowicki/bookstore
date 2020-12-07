@@ -1,17 +1,29 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import ItemInCart from '../itemInCart/ItemInCart';
 import {useSelector} from 'react-redux';
 import bag from '../../../assets/images/bag.png'
 import ProgressLine from '../progressLine/ProgressLine';
+import CustomLink from '../../atoms/customLink/CustomLink';
+
+const slide = keyframes`
+  from {transform: scaleX(0); opacity: 0}
+  to {transform: scaleX(1); opacity: 1}
+`
 
 const StyledWrapper = styled.div`
   display: grid;
   grid-template-columns: 60% 40%;
 `
 
-const StyledAside = styled.aside`
+const StyledAside = styled.aside.attrs({
+  className: 'mt-5 ml-2'
+})`
   grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+  animation: ${slide} 1s;
+  transform-origin: right;
 `
 
 const StyledInfo = styled.div.attrs({
@@ -43,25 +55,60 @@ const StyledCart = styled.div`
   display: grid;
 `
 
-const StyledCartHead = styled.div.attrs({
-  className: 'mb-4 p-3'
-})`
+const StyledCartCalculate = styled.div`
+    font: 20px Arial, sans-serif;
+    color: black;
 `
 
+const StyledCartPrice = styled.div`
+  font: 23px Arial, sans-serif;
+  font-weight: 600;
+  color: mediumseagreen;
+`
+
+const StyledLinkContent = styled.div`
+  background-color: #9e9b7b;
+  width: 120px;
+  height: 40px;
+  border-radius: 8px;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 40px;
+`
+
+
 const CartComponent = () => {
+  const [stateBooks, setStateBooks] = useState([])
+
   const cart = useSelector(state => state.cart.cart)
+  const price = useSelector(state => state.cart.price)
+  const books = useSelector(state => state.books.books)
+  const ids = cart.map(item => item.id)
+  useEffect(() => {
+    if (books) {
+      setStateBooks(books.filter(item => ids.includes(item.id)))
+    }
+  }, [books])
+
+  const sumCart = () => {
+    let price = 0;
+    cart.map(item => {
+      price += (item.quantity * item.price)
+    })
+
+    return price
+  }
+
 
   return (
     <Fragment>
       <div className='d-flex flex-row justify-content-center mt-3 mb-4'>
         <ProgressLine stage='first'/>
       </div>
-
-      <StyledWrapper>
-        <StyledCart>
-          {cart.length ? (
-            <div>
-
+      {cart.length ? (
+        <StyledWrapper>
+            <StyledCart>
               <StyledInfo>
                 <StyledTitle width='80%'>
                   Produkty w koszyku
@@ -76,17 +123,29 @@ const CartComponent = () => {
 
               {cart.map((item, i) => (
                 <ItemInCart key={item.id} book={item} index={i}/>))}
-            </div>
-          ) : (
-            <StyledBag src={bag} alt='torba zakupowa'/>
-          )}
-        </StyledCart>
+            </StyledCart>
 
-
-        <StyledAside>
-
-        </StyledAside>
-      </StyledWrapper>
+            <StyledAside>
+              <div className='d-flex flex-row justify-content-around'>
+                <StyledCartCalculate>
+                  Aktualna wartość koszyka:
+                </StyledCartCalculate>
+                <StyledCartPrice>
+                  {sumCart()} zł
+                </StyledCartPrice>
+              </div>
+              <div className='mt-5 mr-5 d-flex flex-row justify-content-end'>
+                <CustomLink to='/'>
+                  <StyledLinkContent>
+                    dalej
+                  </StyledLinkContent>
+                </CustomLink>
+              </div>
+            </StyledAside>
+        </StyledWrapper>
+      ) : (
+        <StyledBag src={bag} alt='torba zakupowa'/>
+      )}
     </Fragment>
   );
 };
