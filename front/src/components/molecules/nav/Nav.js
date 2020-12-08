@@ -4,6 +4,7 @@ import logo from '../../../assets/images/logo.jpg'
 import CustomLink from '../../atoms/customLink/CustomLink';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Tooltip from '@material-ui/core/Tooltip';
+import {useSelector} from 'react-redux';
 
 const slide = keyframes`
   from {transform: scaleX(0); opacity: 0}
@@ -48,7 +49,26 @@ const StyledLogoContent = styled.div`
     align-items: center;
 `
 
+const StyledQuantity = styled.div`
+  position: absolute;
+  left: 25px;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-start;
+  border: 2px solid #C2F54C;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font: 18px Arial, sans-serif;
+  font-weight: 600;
+  color: #C2F54C;
+`
+
 const Nav = () => {
+  const cart = useSelector(state => state.cart.cart)
+
   return (
     <StyledNav>
       <StyledUl>
@@ -69,7 +89,10 @@ const Nav = () => {
           <Tooltip title='Przejdź do koszyka'>
             <div className='mr-3'>
               <CustomLink to='/cart'>
-                <ShoppingCartIcon style={{color: 'lightgrey'}}  fontSize='large'/>
+                <div className='d-flex flex-row position-relative'>
+                  <ShoppingCartIcon style={{color: cart.length ? '#C2F54C' :'lightgrey', fontSize: '50px'}}/>
+                  {cart.length ? (<StyledQuantity>{cart.length}</StyledQuantity>) : null}
+                </div>
               </CustomLink>
             </div>
           </Tooltip>

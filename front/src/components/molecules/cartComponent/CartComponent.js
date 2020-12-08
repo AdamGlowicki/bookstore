@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import styled, {keyframes} from 'styled-components';
+import styled, {css, keyframes} from 'styled-components';
 import ItemInCart from '../itemInCart/ItemInCart';
 import {useSelector} from 'react-redux';
 import bag from '../../../assets/images/bag.png'
@@ -63,7 +63,7 @@ const StyledCartCalculate = styled.div`
 const StyledCartPrice = styled.div`
   font: 23px Arial, sans-serif;
   font-weight: 600;
-  color: mediumseagreen;
+  color: #3A70DE;
 `
 
 const StyledLinkContent = styled.div.attrs({
@@ -79,6 +79,13 @@ const StyledLinkContent = styled.div.attrs({
   font: 14px Arial, sans-serif;
   font-weight: 600;
   border-radius: 4px;
+  ${({second}) => (
+  second && css`
+      background-color: #E0553F;
+      height: 28px;
+      font-size: 10px;
+    `
+)}
 `
 
 
@@ -112,40 +119,49 @@ const CartComponent = () => {
       </div>
       {cart.length ? (
         <StyledWrapper>
-            <StyledCart>
-              <StyledInfo>
-                <StyledTitle width='80%'>
-                  Produkty w koszyku
-                </StyledTitle>
-                <StyledTitle width='10%'>
-                  Ilość
-                </StyledTitle>
-                <StyledTitle width='10%'>
-                  Usuń
-                </StyledTitle>
-              </StyledInfo>
+          <StyledCart>
+            <StyledInfo>
+              <StyledTitle width='80%'>
+                Produkty w koszyku
+              </StyledTitle>
+              <StyledTitle width='10%'>
+                Ilość
+              </StyledTitle>
+              <StyledTitle width='10%'>
+                Usuń
+              </StyledTitle>
+            </StyledInfo>
 
-              {cart.map((item, i) => (
-                <ItemInCart key={item.id} book={item} index={i}/>))}
-            </StyledCart>
+            {cart.map((item, i) => (
+              <ItemInCart key={item.id} book={item} index={i}/>))}
+          </StyledCart>
 
-            <StyledAside>
-              <div className='d-flex flex-row justify-content-around'>
-                <StyledCartCalculate>
-                  Aktualna wartość koszyka:
-                </StyledCartCalculate>
-                <StyledCartPrice>
-                  {sumCart()} zł
-                </StyledCartPrice>
-              </div>
-              <div className='mt-5 mr-5 d-flex flex-row justify-content-end'>
-                <CustomLink to='credentials'>
-                  <StyledLinkContent>
-                    dalej
+          <StyledAside>
+            <div className='d-flex flex-row justify-content-around'>
+              <StyledCartCalculate>
+                Aktualna wartość koszyka:
+              </StyledCartCalculate>
+              <StyledCartPrice>
+                {sumCart()} zł
+              </StyledCartPrice>
+            </div>
+
+            <div className='mt-5 mr-5 d-flex flex-row justify-content-between align-items-center'>
+              <div className='ml-5'>
+                <CustomLink to='books'>
+                  <StyledLinkContent second>
+                    do strony głównej
                   </StyledLinkContent>
                 </CustomLink>
               </div>
-            </StyledAside>
+
+              <CustomLink to='credentials'>
+                <StyledLinkContent>
+                  Do danych adresowych
+                </StyledLinkContent>
+              </CustomLink>
+            </div>
+          </StyledAside>
         </StyledWrapper>
       ) : (
         <StyledBag src={bag} alt='torba zakupowa'/>
