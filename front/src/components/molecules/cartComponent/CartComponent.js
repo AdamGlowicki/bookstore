@@ -66,15 +66,19 @@ const StyledCartPrice = styled.div`
   color: mediumseagreen;
 `
 
-const StyledLinkContent = styled.div`
-  background-color: #9e9b7b;
-  width: 120px;
-  height: 40px;
-  border-radius: 8px;
-  color: white;
+const StyledLinkContent = styled.div.attrs({
+  className: 'p-2'
+})`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  background-color: #AFCCFA;
   text-transform: uppercase;
-  text-align: center;
-  line-height: 40px;
+  color: white;
+  font: 14px Arial, sans-serif;
+  font-weight: 600;
+  border-radius: 4px;
 `
 
 
