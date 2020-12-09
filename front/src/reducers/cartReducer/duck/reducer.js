@@ -7,7 +7,6 @@ import {handleAddToCart, remove, setQuantity} from './method';
 
 const initState = {
   cart: [],
-  price: 0
 };
 
 const cartReducer = (state = initState, {type, payload}) => {

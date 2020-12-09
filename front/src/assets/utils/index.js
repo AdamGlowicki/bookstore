@@ -27,12 +27,12 @@ export const divideArray = (array, partsNumber) => {
 export const getSessionStorage = () => {
   const sessionData = Object.entries(sessionStorage)
   return sessionData.map((item, i) => {
-      if (typeof parseInt(item[0]) !== 'number') {
+      if (isNaN(parseInt(item[0]))) {
           return null
       }
       const obj = JSON.parse(item[1])
       return ({id: parseInt(item[0]), quantity: obj.quantity, price: obj.price})
-  }).filter(item => item != null)
+  }).filter(item => item !== null)
 }
 
 export const handleAddToCart = (dispatch, book) => {

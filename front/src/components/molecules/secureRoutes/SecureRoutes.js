@@ -12,7 +12,6 @@ const SecureRoutes = () => {
       {cart.length ? (
         <Fragment>
           <Route path='/credentials' component={Credentials}/>
-          <Route path='/finishPage' component={FinishPage}/>
         </Fragment>
       ) : null}
     </Fragment>

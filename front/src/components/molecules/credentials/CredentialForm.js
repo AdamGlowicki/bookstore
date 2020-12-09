@@ -109,7 +109,7 @@ const CredentialForm = () => {
       if (postOk) {
         removeFromSessionStorage();
         dispatch(removeAfterBuy(ids))
-        history.push('/books')
+        history.push('/finishPage')
       }
     }
   })

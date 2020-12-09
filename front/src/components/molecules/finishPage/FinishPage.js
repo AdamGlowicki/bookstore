@@ -47,7 +47,7 @@ const FinishPage = () => {
     <StyledWrapper>
       <ProgressLine stage='third'/>
       <StyledTitle>
-        Dziękujemy za zakupy w naszym sklepie, za 5 sekund nastąpi przekierowaine na strone główną.
+        Dziękujemy za zakupy w naszym sklepie, za 5 sekund nastąpi przekierowanie na stronę główną.
       </StyledTitle>
 
       <div className='mt-5'>

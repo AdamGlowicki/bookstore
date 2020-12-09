@@ -124,18 +124,21 @@ const BookDetail = () => {
               </div>
 
             </div>
+
             <div>
-              <StyledDepiction more={moreInfo}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
-                accusantium ad cum delectus dicta, eligendi eveniet facere, illo
-                incidunt ipsam nobis nulla odit perspiciatis quia rem
-                repellendus
-                reprehenderit soluta ut.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta
-                eaque eligendi minima nostrum placeat quas ratione. Assumenda
-                commodi culpa fugiat, iusto minus, nam natus nemo perferendis
-                quasi quos vitae, voluptas?
-              </StyledDepiction>
+              <div>
+                <StyledDepiction more={moreInfo}>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
+                  accusantium ad cum delectus dicta, eligendi eveniet facere, illo
+                  incidunt ipsam nobis nulla odit perspiciatis quia rem
+                  repellendus
+                  reprehenderit soluta ut.
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta
+                  eaque eligendi minima nostrum placeat quas ratione. Assumenda
+                  commodi culpa fugiat, iusto minus, nam natus nemo perferendis
+                  quasi quos vitae, voluptas?
+                </StyledDepiction>
+              </div>
               <Button onClick={() => setMoreInfo(!moreInfo)} size='small'
                       aria-setsize={14}>{moreInfo? 'mniej' : 'więcej'}</Button>
             </div>

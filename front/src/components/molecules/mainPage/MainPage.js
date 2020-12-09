@@ -47,6 +47,7 @@ const MainPage = () => {
   const [sort, setSort] = useState('');
   const [page, setPage] = useState(1);
   const [showNumber, setShowNumber] = useState(8);
+  const [searchItem, setSearchItem] = useState([])
 
   const books = useSelector(state => state.books.books)
   const dispatch = useDispatch();
@@ -72,6 +73,10 @@ const MainPage = () => {
     setShowNumber(value)
   }
 
+  const handleSearch = (string) => {
+    setSearchItem(books.filter(item => item.title.includes(string)))
+  }
+
   return (
     <div>
       <StyledControls>
@@ -83,7 +88,7 @@ const MainPage = () => {
         </StyledSort>
 
         <div className='mr-5'>
-          <AsyncSelect width='300px'/>
+          <AsyncSelect width='300px' search={handleSearch} value={searchItem}/>
         </div>
       </StyledControls>
 

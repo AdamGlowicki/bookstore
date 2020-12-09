@@ -10,6 +10,7 @@ import {getSessionStorage} from '../../../assets/utils';
 import {addFromSession} from '../../../reducers/cartReducer/duck/actions';
 import SecureRoutes from '../../molecules/secureRoutes/SecureRoutes';
 import BookDetail from '../../molecules/bookDetail/BookDetail';
+import FinishPage from '../../molecules/finishPage/FinishPage';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const App = () => {
             <Route exact path='/books' component={MainPage}/>
             <Route path='/books/:id' component={BookDetail}/>
             <Route path='/cart' component={CartComponent}/>
+            <Route path='/finishPage' component={FinishPage}/>
             <SecureRoutes/>
           </Switch>
         </MainTheme>

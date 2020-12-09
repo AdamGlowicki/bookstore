@@ -3,28 +3,17 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import InputText from "../inputText/InputText";
 import ViewToAsyncSelect
   from '../../molecules/viewToAsyncSelect/ViewToAsyncSelect';
+import {useSelector} from 'react-redux';
+import CustomLink from '../customLink/CustomLink';
 
-const AsyncSelect = ({setSelected, value, width}) => {
+const AsyncSelect = ({width}) => {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [disabled, setDisabled] = useState(false);
   const [search, setSearch] = useState('')
-  const [selectedValue, setSelectedValue] = useState('')
-
-  const asyncSearch = async () => {
-    setDisabled(true)
-    try {
-      // const response = await getData(`${url}/${search}`, cookies);
-      // setOptions(response.data.data ? response.data.data : [])
-
-    } catch (e) {
-
-    }
-    setDisabled(false)
-  }
 
   useEffect(() => {
-    let handler = setTimeout(asyncSearch, 500)
+    let handler = setTimeout( () =>handleSearch(search), 500)
 
     return () => {
       clearTimeout(handler)
@@ -37,6 +26,15 @@ const AsyncSelect = ({setSelected, value, width}) => {
     }
   }, [open]);
 
+  const books = useSelector(state => state.books.books)
+
+  const handleSearch = (string) => {
+    setDisabled(true)
+    const searched = books ? books.filter(item => item.title.toLowerCase().includes(string.toLowerCase())) : []
+    setOptions(searched)
+    setDisabled(false)
+  }
+
   return (
     <Autocomplete
       id="asynchronous-demo"
@@ -48,13 +46,11 @@ const AsyncSelect = ({setSelected, value, width}) => {
         setOpen(false);
       }}
       getOptionSelected={(option, value) => {
-        return option.model_name === value.model_name
+        return option.id === value.id;
       }}
-      getOptionLabel={(option) => !_.isEmpty(option) ? `${option.id} ${option.model_name}` : ''}
+      getOptionLabel={(object) => Object.values(object).length ? `${object.title}` : ''}
       options={options}
-      onChange={setSelected}
-      value={value}
-      noOptionsText='Nie znaleziono dopsaowania.'
+      noOptionsText='Nie znaleziono dopasowania'
       renderInput={(params) => (
           <InputText
             {...params}
@@ -67,7 +63,9 @@ const AsyncSelect = ({setSelected, value, width}) => {
       )}
       renderOption={(options, val) => {
         return (
-          <ViewToAsyncSelect data={options}/>
+          <CustomLink to={`/books/${options.id}`}>
+            <ViewToAsyncSelect book={options}/>
+          </CustomLink>
         )}}
     />
   );
