@@ -1,13 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import styled, {keyframes, css} from 'styled-components';
-import {getCurrency} from '../../../assets/utils';
+import {getCurrency, handleAddToCart} from '../../../assets/utils';
 import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {useFocusRef} from '../../../customHooks';
 import {useDispatch} from 'react-redux';
-import {putItemToCart} from '../../../reducers/cartReducer/duck/actions';
-import {switchAlert} from '../../../reducers/alertReducer/duck/actions';
+import CustomLink from '../../atoms/customLink/CustomLink';
 
 const slide = keyframes`
   0% {transform: translateY(-50px); opacity: 0}
@@ -38,10 +37,10 @@ const StyledAvatar = styled.img`
   max-height: 196px;
   object-fit: contain;
   ${({animation}) => (
-    animation && css`
+  animation && css`
       animation: ${opacity} 1s;
     `
-  )}
+)}
 `
 
 const StyledDescription = styled.div.attrs({
@@ -118,31 +117,17 @@ const BookComponent = ({book, index}) => {
     }
   }, [])
 
-  const addOne = (item) => (
-    (parseInt(item) + 1).toString()
-  )
-
-  const handleAddToCart = () => {
-    const cartItem = sessionStorage.getItem(book.id.toString())
-    if (cartItem) {
-      const item = JSON.parse(cartItem)
-      sessionStorage.setItem(book.id.toString(), JSON.stringify({quantity: item.quantity + 1 , price: book.price}))
-    } else {
-      sessionStorage.setItem(book.id.toString(), JSON.stringify({quantity: 1 , price: book.price}))
-    }
-
-    dispatch(putItemToCart({id: book.id, price: book.price}))
-    dispatch(switchAlert({on: true, message: 'Pomyślnie dodano do koszyka', type: 'success'}))
-  }
-
   return (
     <StyledWrapper display={display ? 'true' : undefined}>
-      <StyledAvatar
-        ref={ref}
-        src={book.cover_url}
-        alt={book.title}
-        animation={animationOnPicture ? 'true' : undefined}
-      />
+      <CustomLink to={`books/${book.id}`}>
+        <StyledAvatar
+          ref={ref}
+          src={book.cover_url}
+          alt={book.title}
+          animation={animationOnPicture ? 'true' : undefined}
+        />
+      </CustomLink>
+
 
       <StyledDescription>
         <StyledTitle>
@@ -166,7 +151,7 @@ const BookComponent = ({book, index}) => {
 
       <StyledPartition>
         <Button
-          onClick={handleAddToCart}
+          onClick={() => handleAddToCart(dispatch, book)}
           className='mb-2 mr-2'
           endIcon={<AddShoppingCartIcon fontSize='small'/>}
           size='small'

@@ -1,10 +1,11 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import styled, {css, keyframes} from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import ItemInCart from '../itemInCart/ItemInCart';
 import {useSelector} from 'react-redux';
 import bag from '../../../assets/images/bag.png'
 import ProgressLine from '../progressLine/ProgressLine';
 import CustomLink from '../../atoms/customLink/CustomLink';
+import StyledLinkContent from '../../atoms/linkContent/StyledLinkContent';
 
 const slide = keyframes`
   from {transform: scaleX(0); opacity: 0}
@@ -65,29 +66,6 @@ const StyledCartPrice = styled.div`
   font-weight: 600;
   color: #3A70DE;
 `
-
-const StyledLinkContent = styled.div.attrs({
-  className: 'p-2'
-})`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 36px;
-  background-color: #AFCCFA;
-  text-transform: uppercase;
-  color: white;
-  font: 14px Arial, sans-serif;
-  font-weight: 600;
-  border-radius: 4px;
-  ${({second}) => (
-  second && css`
-      background-color: #E0553F;
-      height: 28px;
-      font-size: 10px;
-    `
-)}
-`
-
 
 const CartComponent = () => {
   const [stateBooks, setStateBooks] = useState([])

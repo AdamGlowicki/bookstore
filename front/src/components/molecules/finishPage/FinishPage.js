@@ -3,6 +3,7 @@ import styled, {keyframes} from 'styled-components';
 import ProgressLine from '../progressLine/ProgressLine';
 import CustomLink from '../../atoms/customLink/CustomLink';
 import {useHistory} from 'react-router';
+import StyledLinkContent from '../../atoms/linkContent/StyledLinkContent';
 
 const slideDown = keyframes`
   0% {transform: translateY(-100px); opacity: 0}
@@ -16,6 +17,7 @@ const StyledWrapper = styled.div`
   justify-content: center;
   align-items: center;
   animation: ${slideDown} 1s;
+  transform-origin: top;
 `
 
 const StyledTitle = styled.div.attrs({
@@ -28,21 +30,6 @@ const StyledTitle = styled.div.attrs({
   width: 60vw;
   font: 32px Arial, sans-serif;
   font-weight: 600;
-`
-
-const StyledLinkContent = styled.div.attrs({
-  className: 'p-2'
-})`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 36px;
-  background-color: #AFCCFA;
-  text-transform: uppercase;
-  color: white;
-  font: 14px Arial, sans-serif;
-  font-weight: 600;
-  border-radius: 4px;
 `
 
 const FinishPage = () => {

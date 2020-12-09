@@ -3,6 +3,7 @@ import CredentialForm from './CredentialForm';
 import styled, {keyframes} from 'styled-components';
 import ProgressLine from '../progressLine/ProgressLine';
 import CustomLink from '../../atoms/customLink/CustomLink';
+import StyledLinkContent from '../../atoms/linkContent/StyledLinkContent';
 
 const slideLeft = keyframes`
   0% {transform: translateX(-50px); opacity: 0}
@@ -15,21 +16,6 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
-
-const StyledLinkContent = styled.div.attrs({
-  className: 'p-2'
-})`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 36px;
-  background-color: #E0553F;
-  text-transform: uppercase;
-  color: white;
-  font: 14px Arial, sans-serif;
-  font-weight: 600;
-  border-radius: 4px;
 `
 
 const StyledLink = styled(CustomLink)`
