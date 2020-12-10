@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8cb0c55e-b62e-4bdf-b478-e7f2275241b9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../front/src/components/atoms/select/Select.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front/src/components/molecules/bookComponent/BookComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front/src/components/molecules/mainPage/MainPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front/src/enum/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front/src/utils/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/src/assets/library-869061_1920.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/src/assets/main-theme-books.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/src/components/Root.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/components/Root.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/src/components/atoms/asyncSelect/AsyncSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/components/atoms/asyncSelect/AsyncSelect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/src/components/atoms/inputText/InputText.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/components/atoms/inputText/InputText.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/src/components/molecules/nav/Nav.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/components/molecules/nav/Nav.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/src/components/organisms/mainTheme/MainTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/components/organisms/mainTheme/MainTheme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front/src/reducers/bookReducer/duck/operations.js" beforeDir="false" afterPath="$PROJECT_DIR$/../front/src/reducers/bookReducer/duck/operations.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1lEbSvojOooQlHPoC8KS0cZKHMQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8cb0c55e-b62e-4bdf-b478-e7f2275241b9" name="Default Changelist" comment="" />
+      <created>1607165206794</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607165206794</updated>
+      <workItem from="1607165208186" duration="3066000" />
+      <workItem from="1607179951571" duration="4466000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1607176066278">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1366.728@1920.0.1366.728" timestamp="1607176066278" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1607176066278">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1366.728@1920.0.1366.728" timestamp="1607176066278" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1607176066278">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1366.728@1920.0.1366.728" timestamp="1607176066278" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1607176066278">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1366.728@1920.0.1366.728" timestamp="1607176066278" />
+    <state x="2443" y="66" key="RollbackChangesDialog" timestamp="1607183527324">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state x="2443" y="66" key="RollbackChangesDialog/0.0.1920.1040/1920.0.1366.728@1920.0.1366.728" timestamp="1607183527324" />
+    <state x="674" y="69" width="1020" height="501" key="dock-window-1" timestamp="1607181468728">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="674" y="69" width="1020" height="501" key="dock-window-1/0.0.1920.1040/1920.0.1366.728@1920.0.1366.728" timestamp="1607181468728" />
+    <state x="569" y="33" width="1020" height="501" key="dock-window-2" timestamp="1607181775298">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="569" y="33" width="1020" height="501" key="dock-window-2/0.0.1920.1040/1920.0.1366.728@1920.0.1366.728" timestamp="1607181775298" />
+    <state x="2310" y="0" width="585" height="728" key="find.popup" timestamp="1607178944640">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state x="2310" y="0" width="585" height="728" key="find.popup/0.0.1920.1040/1920.0.1366.728@1920.0.1366.728" timestamp="1607178944640" />
+    <state x="2266" y="49" key="search.everywhere.popup" timestamp="1607178934128">
+      <screen x="1920" y="0" width="1366" height="728" />
+    </state>
+    <state x="2266" y="49" key="search.everywhere.popup/0.0.1920.1040/1920.0.1366.728@1920.0.1366.728" timestamp="1607178934128" />
+  </component>
+</project>
