@@ -1,7 +1,7 @@
 import styled, {css} from 'styled-components';
 
 const StyledLinkContent = styled.div.attrs({
-  className: 'p-2'
+  className: 'p-2 mt-5'
 })`
   display: flex;
   justify-content: center;

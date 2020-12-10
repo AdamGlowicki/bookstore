@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import DraggableModal from '../draggableModal/DraggableModal';
 import Button from '@material-ui/core/Button';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import {mediaQueries} from '../../../enum';
 
 const StyledWrapper = styled.div.attrs({
   className: 'p-3'
@@ -11,6 +13,11 @@ const StyledWrapper = styled.div.attrs({
   flex-direction: column;
   justify-content: space-between;
   height: 120px;
+  ${({mobile}) => (
+  mobile && css`
+      width: 80vw;
+    `
+)}
 `
 
 const StyledContent = styled.div`
@@ -26,6 +33,7 @@ const StyledButtons = styled.div`
 `
 
 const AcceptWindow = ({open, setOpen, callback, message}) => {
+  const mobile = useMediaQuery(mediaQueries.mobile)
 
   const handleAccept = () => {
     callback()
@@ -34,7 +42,7 @@ const AcceptWindow = ({open, setOpen, callback, message}) => {
 
   return (
     <DraggableModal open={open} setOpen={setOpen}>
-      <StyledWrapper>
+      <StyledWrapper mobile={mobile}>
         <StyledContent>
           <div>
             {message}

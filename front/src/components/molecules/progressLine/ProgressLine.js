@@ -1,10 +1,17 @@
 import React, {useEffect, useReducer} from 'react';
-import styled, {css} from 'styled-components';
+import styled, {css, keyframes} from 'styled-components';
 import PropTypes from 'prop-types';
+
+const slide = keyframes`
+  from {transform: scaleX(0); opacity: 0}
+  to {transform: scaleX(1); opacity: 1}
+`
 
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  animation: ${slide} 1s;
+  transform-origin: left;
 `
 
 const StyledProgress = styled.div`
@@ -81,7 +88,7 @@ const ProgressLine = ({stage}) => {
       </StyledProgress>
 
       <StyledDescription>
-        <StyledTitle>Zawatrość koszyka</StyledTitle>
+        <StyledTitle>Zawartość koszyka</StyledTitle>
         <StyledTitle>Adres dostawy</StyledTitle>
         <StyledTitle>Podsumowanie</StyledTitle>
       </StyledDescription>

@@ -31,7 +31,7 @@ const Credentials = props => {
       <CredentialForm/>
 
       <StyledLink to='cart'>
-        <StyledLinkContent>
+        <StyledLinkContent second>
           wróc do koszyka
         </StyledLinkContent>
       </StyledLink>

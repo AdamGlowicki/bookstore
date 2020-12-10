@@ -11,8 +11,9 @@ const slide = keyframes`
   to {transform: scaleX(1); opacity: 1}
 `
 
-const StyledNav = styled.nav`
-  margin-top: 80px;
+const StyledNav = styled.nav.attrs({
+  className: 'mt-3'
+})`
   width: 100%;
   animation: ${slide} 1s;
   transform-origin: 0 0;

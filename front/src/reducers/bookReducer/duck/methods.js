@@ -8,12 +8,12 @@ const sortPriceDESC = (array) => {
   return array.sort((a, b) =>  b.price - a.price)
 }
 
-const sortPagesASC = (array) => {
-  return array.sort((a, b) => a.pages - b.pages)
+const sortAlphabetASC = (array) => {
+  return array.sort((a, b) => a.title.localeCompare(b.title))
 }
 
-const sortPagesDESC = (array) => {
-  return array.sort((a, b) => b.pages - a.pages)
+const sortAlphabetDESC = (array) => {
+  return array.sort((a, b) => b.title.localeCompare(a.title))
 }
 
 export const sortBooks = (category, array) => {
@@ -22,10 +22,10 @@ export const sortBooks = (category, array) => {
       return sortPriceASC(array);
     case sortLabels.PRICE_DESC:
       return sortPriceDESC(array);
-    case sortLabels.PAGE_ASC:
-      return sortPagesASC(array);
-    case sortLabels.PAGE_DESC:
-      return sortPagesDESC(array);
+    case sortLabels.ALPHABET_ASC:
+      return sortAlphabetASC(array);
+    case sortLabels.ALPHABET_DESC:
+      return sortAlphabetDESC(array);
     default:
       return []
   }

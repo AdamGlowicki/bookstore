@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import InputText from "../inputText/InputText";
+import InputText from "../../atoms/inputText/InputText";
 import ViewToAsyncSelect
-  from '../../molecules/viewToAsyncSelect/ViewToAsyncSelect';
+  from '../viewToAsyncSelect/ViewToAsyncSelect';
 import {useSelector} from 'react-redux';
-import CustomLink from '../customLink/CustomLink';
+import CustomLink from '../../atoms/customLink/CustomLink';
 
 const AsyncSelect = ({width}) => {
   const [open, setOpen] = useState(false);

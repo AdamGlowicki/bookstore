@@ -7,6 +7,8 @@ import {useParams} from 'react-router';
 import {getCurrency, handleAddToCart} from '../../../assets/utils';
 import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import {mediaQueries} from '../../../enum';
 
 const slideDown = keyframes`
   0% {transform: translateY(-100px); opacity: 0}
@@ -22,6 +24,12 @@ const StyledWrapper = styled.div.attrs({
   justify-content: center;
   animation: ${slideDown} 1s;
   transform-origin: top;
+  ${({mobile}) => (
+  mobile && css`
+      flex-direction: column;
+      align-items: center;
+    `
+  )}
 `
 
 const StyledAvatar = styled.img`
@@ -33,6 +41,7 @@ const StyledTitle = styled.h3`
   font: 24px Arial, sans-serif;
   font-weight: 600;
   color: #0F1111;
+  overflow-wrap: break-word;
 `
 
 const StyledPrice = styled.div.attrs({
@@ -63,12 +72,20 @@ const StyledDepiction = styled.div.attrs({
   more && css`
       height: auto;
     `
-)}
+  )}
+  ${({mobile}) => (
+  mobile && css`
+      width: auto;
+    `
+  )}
+
 `
 
 const BookDetail = () => {
   const [book, setBook] = useState({})
   const [moreInfo, setMoreInfo] = useState(false)
+
+  const mobile = useMediaQuery(mediaQueries.mobile)
 
   const dispatch = useDispatch()
   const {id} = useParams();
@@ -93,16 +110,20 @@ const BookDetail = () => {
   return (
     <Fragment>
       {Object.values(book).length ? (
-        <StyledWrapper>
+        <StyledWrapper mobile={mobile}>
           <div>
             <StyledAvatar src={book.cover_url} alt='książka'/>
           </div>
 
-          <div className='d-flex flex-column justify-content-start ml-5'>
+          <div
+            className={mobile ? '' : 'd-flex flex-column justify-content-start ml-5'}>
             <div className='d-flex flex-column'>
               <StyledTitle>
                 <span style={{font: '24px arial 600,sans-serif'}}
-                      className='mr-2'>Tytuł:</span>
+                      className='mr-2'
+                >
+                  Tytuł:
+                </span>
                 {book.title}
               </StyledTitle>
               <StyledPrice>
@@ -117,7 +138,7 @@ const BookDetail = () => {
                   className='mb-2 mr-2'
                   endIcon={<AddShoppingCartIcon fontSize='small'/>}
                   size='small'
-                  style={{background: 'aqua'}}
+                  style={{background: '#afccfa'}}
                 >
                   Dodaj
                 </Button>
@@ -127,20 +148,22 @@ const BookDetail = () => {
 
             <div>
               <div>
-                <StyledDepiction more={moreInfo}>
+                <StyledDepiction mobile={mobile} more={moreInfo}>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
-                  accusantium ad cum delectus dicta, eligendi eveniet facere, illo
+                  accusantium ad cum delectus dicta, eligendi eveniet facere,
+                  illo
                   incidunt ipsam nobis nulla odit perspiciatis quia rem
                   repellendus
                   reprehenderit soluta ut.
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Dicta
                   eaque eligendi minima nostrum placeat quas ratione. Assumenda
                   commodi culpa fugiat, iusto minus, nam natus nemo perferendis
                   quasi quos vitae, voluptas?
                 </StyledDepiction>
               </div>
               <Button onClick={() => setMoreInfo(!moreInfo)} size='small'
-                      aria-setsize={14}>{moreInfo? 'mniej' : 'więcej'}</Button>
+                      aria-setsize={14}>{moreInfo ? 'mniej' : 'więcej'}</Button>
             </div>
 
           </div>

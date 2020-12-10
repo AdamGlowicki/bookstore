@@ -25,6 +25,7 @@ const StyledWrapper = styled.div.attrs({
   width: 300px;
   display: none;
   flex-direction: column;
+  align-items: center;
   animation: ${slide} 1s;
   ${({display}) => (
   display && css`
@@ -46,6 +47,7 @@ const StyledAvatar = styled.img`
 const StyledDescription = styled.div.attrs({
   className: 'ml-2 mt-3'
 })`
+  width: 300px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -155,7 +157,7 @@ const BookComponent = ({book, index}) => {
           className='mb-2 mr-2'
           endIcon={<AddShoppingCartIcon fontSize='small'/>}
           size='small'
-          style={{background: 'aqua'}}
+          style={{background: '#afccfa'}}
         >
           Dodaj
         </Button>

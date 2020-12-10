@@ -1,23 +1,24 @@
 import React, {useState} from 'react';
-import styled, {keyframes} from 'styled-components'
+import styled, {css, keyframes} from 'styled-components'
 import Select from '../../atoms/select/Select';
 import BookComponent from '../bookComponent/BookComponent';
 import {useDispatch, useSelector} from 'react-redux';
-import {showNumbers, sortTemplates} from '../../../enum';
+import {mediaQueries, showNumbers, sortTemplates} from '../../../enum';
 import MenuItem from '@material-ui/core/MenuItem';
-import AsyncSelect from '../../atoms/asyncSelect/AsyncSelect';
+import AsyncSelect from '../asyncSelect/AsyncSelect';
 import PaginationComponent
   from '../../atoms/paginationComponent/PaginationComponent';
 import {divideArray} from '../../../assets/utils';
 import {sortBooksInStore} from '../../../reducers/bookReducer/duck/actions';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const slide = keyframes`
   from {transform: scaleX(0); opacity: 0;}
   to {transform: scaleX(1); opacity: 1;}
 `
-const StyledSort = styled.div.attrs({
-  className: 'ml-5'
-})`
+const StyledSort = styled.div.attrs(props =>({
+  className: props.mobile ? '' : 'ml-5'
+}))`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -41,6 +42,12 @@ const StyledControls = styled.div.attrs({
   align-items: center;
   animation: ${slide} .8s;
   transform-origin: left;
+  ${({mobile}) => (
+    mobile && css`
+      flex-direction: column;
+      align-items: flex-start;
+    `
+)}
 `
 
 const MainPage = () => {
@@ -51,6 +58,8 @@ const MainPage = () => {
 
   const books = useSelector(state => state.books.books)
   const dispatch = useDispatch();
+
+  const mobile = useMediaQuery(mediaQueries.mobile)
 
   const dividedBooks = divideArray(books, showNumber)
 
@@ -79,10 +88,10 @@ const MainPage = () => {
 
   return (
     <div>
-      <StyledControls>
-        <StyledSort>
-          <Select width='180px' value={sort} onChange={handleSelectSort} label='Sortuj wg.:' menuItems={menuItems}/>
-          <div className='ml-3'>
+      <StyledControls mobile={mobile}>
+        <StyledSort mobile={mobile}>
+          <Select width='180px' value={sort} onChange={handleSelectSort} label='Sortuj' menuItems={menuItems}/>
+          <div className={mobile ? '' : 'ml-3'}>
             <Select width='45px' value={showNumber} onChange={handleSelectShowNumbers} menuItems={menuNumbersItem}/>
           </div>
         </StyledSort>

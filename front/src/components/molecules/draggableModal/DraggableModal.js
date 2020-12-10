@@ -52,6 +52,7 @@ const StyledModalContent = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   outline: none;
+  z-index: 9999;
 `
 
 const DraggableModal = ({open: propsOpen, setOpen: prosSetOpen, children}) => {
