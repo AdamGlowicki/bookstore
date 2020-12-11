@@ -11,6 +11,7 @@ import {addFromSession} from '../../../reducers/cartReducer/duck/actions';
 import SecureRoutes from '../../molecules/secureRoutes/SecureRoutes';
 import BookDetail from '../../molecules/bookDetail/BookDetail';
 import FinishPage from '../../molecules/finishPage/FinishPage';
+import NoMatch from '../../molecules/noMatch/NoMatch';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const App = () => {
             <Route path='/books/:id' component={BookDetail}/>
             <Route path='/cart' component={CartComponent}/>
             <Route path='/finishPage' component={FinishPage}/>
+            <Route path='*' component={NoMatch}/>
             <SecureRoutes/>
           </Switch>
         </MainTheme>

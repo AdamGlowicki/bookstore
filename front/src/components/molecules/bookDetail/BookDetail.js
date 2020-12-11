@@ -3,7 +3,7 @@ import styled, {css, keyframes} from 'styled-components';
 import {useDispatch} from 'react-redux';
 import {getData} from '../../../api';
 import {switchAlert} from '../../../reducers/alertReducer/duck/actions';
-import {useParams} from 'react-router';
+import {useHistory, useParams} from 'react-router';
 import {getCurrency, handleAddToCart} from '../../../assets/utils';
 import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
@@ -86,6 +86,7 @@ const BookDetail = () => {
   const [moreInfo, setMoreInfo] = useState(false)
 
   const mobile = useMediaQuery(mediaQueries.mobile)
+  const history = useHistory();
 
   const dispatch = useDispatch()
   const {id} = useParams();
@@ -100,6 +101,7 @@ const BookDetail = () => {
         message: 'Coś poszło nie tak',
         type: 'error'
       }))
+      history.push('/*')
     }
   }
 
